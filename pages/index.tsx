@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import { gql } from 'graphql-request';
 import { shuffle } from '../utils/shuffle';
 import { useCallback, useState } from 'react';
@@ -8,8 +7,8 @@ import Grid from '../components/Grid';
 import Button from '../components/Button';
 
 const QUERY = gql`
-	query QuestionByTag($tags: [String!]) {
-		questions(where: { tags: $tags }) {
+	query Question {
+		questions {
 			prompt
 			tags
 			id
@@ -20,14 +19,9 @@ const QUERY = gql`
 	}
 `;
 
-// dynamic pages based on tag name
-// randomize questions on render
+type PageProps = { questions: unknown[] };
 
-const queryVariables = {
-	tags: ['JavaScript'],
-};
-
-export default function Home({ questions }: NextPage) {
+export default function Home({ questions }: PageProps) {
 	const [sortedQuestions, setSortedQuestions] = useState(questions);
 
 	const handleShuffleClick = useCallback(() => {
@@ -37,6 +31,7 @@ export default function Home({ questions }: NextPage) {
 		<Grid>
 			<Button onClick={handleShuffleClick}>Shuffle</Button>
 			{sortedQuestions.map((question) => (
+				// @ts-ignore
 				<Question key={question.id} question={question} />
 			))}
 		</Grid>
@@ -44,7 +39,7 @@ export default function Home({ questions }: NextPage) {
 }
 
 export async function getStaticProps() {
-	const { questions } = await graphcms.request(QUERY, queryVariables);
+	const { questions } = await graphcms.request(QUERY);
 
 	return {
 		props: {
