@@ -1,17 +1,23 @@
+import Link from 'next/link';
+import { Question as QuestionType } from '../graphql/generated';
+
 type QuestionProps = {
-	question: unknown;
+	question: QuestionType;
 };
 
 export default function Question({ question }: QuestionProps) {
-	// @ts-ignore
 	const { id, answer, tags, prompt } = question;
 	return (
-		<div key={id}>
+		<div
+			key={id}
+			style={{ height: '90vh', border: '5px dashed rebeccapurple' }}
+		>
 			<h2>{prompt}</h2>
 			<div dangerouslySetInnerHTML={{ __html: answer.html }}></div>
-			{tags.map((tag: unknown) => (
-				// @ts-ignore
-				<button key={tag}>{tag}</button>
+			{tags.map((tag) => (
+				<Link href={`/tags/${tag}`} key={tag}>
+					<button>{tag}</button>
+				</Link>
 			))}
 		</div>
 	);

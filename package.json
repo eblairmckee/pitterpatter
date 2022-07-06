@@ -3,12 +3,16 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
 		"build": "next build",
-		"start": "next start",
-		"lint": "next lint"
+		"generate": "graphql-codegen",
+		"dev": "next dev",
+		"lint": "next lint",
+		"start": "next start"
 	},
 	"dependencies": {
+		"@graphql-codegen/cli": "^2.7.0",
+		"@graphql-codegen/typescript": "^2.6.0",
+		"@graphql-codegen/typescript-operations": "^2.4.3",
 		"graphql": "^16.5.0",
 		"graphql-request": "^4.3.0",
 		"next": "12.2.0",

@@ -1,40 +1,44 @@
-import { gql } from 'graphql-request';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, memo, useEffect } from 'react';
 import { graphcms } from '../../api/graphCMS';
-import { tags } from '../../api/tags';
 import Button from '../../components/Button';
 import Grid from '../../components/Grid';
 import Question from '../../components/Question';
 import { shuffle } from '../../utils/shuffle';
 import QUESTIONS_BY_TAG from '../../src/queries/questionsByTag.graphql';
+import { Tag, Question as QuestionType } from '../../graphql/generated';
+import Navigation from '../../components/Navigation';
 
-// @ts-ignore
-// export default function TagPage({ questions }) {
-// 	const [sortedQuestions, setSortedQuestions] = useState(questions);
+type TagPageProps = {
+	questions: QuestionType[];
+	tag: Tag;
+};
 
-// 	const handleShuffleClick = useCallback(() => {
-// 		setSortedQuestions(shuffle(sortedQuestions));
-// 	}, [sortedQuestions]);
-// 	return (
-// 		<Grid>
-// 			<Button onClick={handleShuffleClick}>Shuffle</Button>
-// 			{/* @ts-ignore */}
-// 			{sortedQuestions.map((question) => (
-// 				<Question key={question.id} question={question} />
-// 			))}
-// 		</Grid>
-// 	);
-// }
+function TagPage({ questions, tag }: TagPageProps) {
+	const [sortedQuestions, setSortedQuestions] = useState(questions);
 
-export default function Page(props) {
-	console.log({ props });
+	useEffect(() => {
+		// shuffle on mount to prevent server/DOM mismatch
+		setSortedQuestions(shuffle(questions));
+	}, [questions]);
 
-	return <div></div>;
+	const handleShuffleClick = useCallback(() => {
+		setSortedQuestions(shuffle(sortedQuestions));
+	}, [sortedQuestions]);
+	return (
+		<Grid>
+			<Navigation active={tag} />
+			<Button onClick={handleShuffleClick}>Shuffle</Button>
+			{sortedQuestions.map((question) => (
+				<Question key={question.id} question={question} />
+			))}
+		</Grid>
+	);
 }
 
+export default memo(TagPage);
+
 export function getStaticPaths() {
-	// TODO: generate this from schema
-	const paths = tags.map((tag) => ({
+	const paths = Object.values(Tag).map((tag) => ({
 		params: {
 			tag,
 		},
@@ -47,9 +51,7 @@ export function getStaticPaths() {
 
 // @ts-ignore
 export async function getStaticProps({ params }) {
-	console.log({ params });
-
-	const tag = params.tag;
+	const tag = params.tag as Tag;
 
 	const { questions } = await graphcms.request(QUESTIONS_BY_TAG, {
 		tags: [tag],
@@ -64,6 +66,7 @@ export async function getStaticProps({ params }) {
 	return {
 		props: {
 			questions,
+			tag,
 		},
 	};
 }
