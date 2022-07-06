@@ -1,23 +1,10 @@
-import { gql } from 'graphql-request';
 import { shuffle } from '../utils/shuffle';
 import { useCallback, useState } from 'react';
 import { graphcms } from '../api/graphCMS';
 import Question from '../components/Question';
 import Grid from '../components/Grid';
 import Button from '../components/Button';
-
-const QUERY = gql`
-	query Question {
-		questions {
-			prompt
-			tags
-			id
-			answer {
-				html
-			}
-		}
-	}
-`;
+import QUESTIONS_QUERY from '../src/queries/questions.graphql';
 
 type PageProps = { questions: unknown[] };
 
@@ -39,7 +26,7 @@ export default function Home({ questions }: PageProps) {
 }
 
 export async function getStaticProps() {
-	const { questions } = await graphcms.request(QUERY);
+	const { questions } = await graphcms.request(QUESTIONS_QUERY);
 
 	return {
 		props: {

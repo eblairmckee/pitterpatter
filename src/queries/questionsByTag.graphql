@@ -1,0 +1,10 @@
+query QuestionByTag($tags: [Tag!]) {
+	questions(where: { tags: $tags }) {
+		prompt
+		tags
+		id
+		answer {
+			html
+		}
+	}
+}

@@ -6,6 +6,7 @@ import Button from '../../components/Button';
 import Grid from '../../components/Grid';
 import Question from '../../components/Question';
 import { shuffle } from '../../utils/shuffle';
+import QUESTIONS_BY_TAG from '../../src/queries/questionsByTag.graphql';
 
 // @ts-ignore
 // export default function TagPage({ questions }) {
@@ -50,20 +51,9 @@ export async function getStaticProps({ params }) {
 
 	const tag = params.tag;
 
-	const QUERY = gql`
-		query QueryByTag($tags: [Tag!]) {
-			questions(where: { tags: $tags }) {
-				prompt
-				tags
-				id
-				answer {
-					html
-				}
-			}
-		}
-	`;
-
-	const { questions } = await graphcms.request(QUERY, { tags: [tag] });
+	const { questions } = await graphcms.request(QUESTIONS_BY_TAG, {
+		tags: [tag],
+	});
 
 	if (questions?.length === 0) {
 		return {

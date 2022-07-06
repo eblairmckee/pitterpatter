@@ -1,0 +1,10 @@
+query Question {
+	questions {
+		prompt
+		tags
+		id
+		answer {
+			html
+		}
+	}
+}
