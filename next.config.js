@@ -1,5 +1,7 @@
+const withLinaria = require('next-linaria');
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withLinaria({
 	reactStrictMode: true,
 	webpack: (config) => {
 		config.module.rules.push({
@@ -12,4 +14,4 @@ module.exports = {
 	webpackDevMiddleware: (config) => {
 		return config;
 	},
-};
+});

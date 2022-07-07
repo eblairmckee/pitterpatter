@@ -17,10 +17,13 @@ export default function Home({ questions }: PageProps) {
 	const handleShuffleClick = useCallback(() => {
 		setSortedQuestions(shuffle(sortedQuestions));
 	}, [sortedQuestions]);
+
 	return (
 		<Grid>
 			<Navigation active="All" />
-			<Button onClick={handleShuffleClick}>Shuffle</Button>
+			<Button fab onClick={handleShuffleClick}>
+				⇅
+			</Button>
 			{sortedQuestions.map((question) => (
 				<Question key={question.id} question={question} />
 			))}

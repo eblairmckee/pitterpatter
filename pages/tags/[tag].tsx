@@ -27,7 +27,9 @@ function TagPage({ questions, tag }: TagPageProps) {
 	return (
 		<Grid>
 			<Navigation active={tag} />
-			<Button onClick={handleShuffleClick}>Shuffle</Button>
+			<Button fab onClick={handleShuffleClick}>
+				⇅
+			</Button>
 			{sortedQuestions.map((question) => (
 				<Question key={question.id} question={question} />
 			))}

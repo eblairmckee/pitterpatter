@@ -1,5 +1,5 @@
 query QuestionByTag($tags: [Tag!]) {
-	questions(where: { tags: $tags }) {
+	questions(where: { tags_contains_some: $tags }) {
 		prompt
 		tags
 		id
