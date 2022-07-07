@@ -2,12 +2,14 @@ import { MouseEventHandler, PropsWithChildren } from 'react';
 import { styled } from '@linaria/react';
 import { accentColors } from '../styles/colors';
 import { shadow } from '../styles/shared';
-import { css, cx } from '@linaria/core';
+import { css, CSSProperties, cx } from '@linaria/core';
 
 type ButtonProps = {
 	onClick: MouseEventHandler<HTMLButtonElement>;
 	fab?: boolean;
 	centered?: boolean;
+	color?: string;
+	style?: CSSProperties;
 };
 
 export default function Button({
@@ -15,7 +17,12 @@ export default function Button({
 	onClick,
 	fab,
 	centered,
+	color,
+	style,
 }: PropsWithChildren<ButtonProps>) {
+	const getColors = color
+		? { background: color }
+		: { background: accentColors[0] };
 	return (
 		<ButtonStyles
 			onClick={onClick}
@@ -23,6 +30,7 @@ export default function Button({
 				fab ? fabStyles : undefined,
 				centered ? centeredStyles : undefined
 			)}
+			style={{ ...getColors, ...style }}
 		>
 			{children}
 		</ButtonStyles>
@@ -41,7 +49,6 @@ export const buttonDefaultStyles = `
 `;
 
 const ButtonStyles = styled.button`
-	background: ${accentColors[0]};
 	${buttonDefaultStyles};
 	height: 2em;
 	width: 2em;
@@ -50,10 +57,10 @@ const ButtonStyles = styled.button`
 `;
 
 const fabStyles = css`
+	border-radius: 100%;
 	position: fixed;
 	bottom: 1em;
 	left: 1em;
-	border-radius: 100%;
 `;
 
 const centeredStyles = css`

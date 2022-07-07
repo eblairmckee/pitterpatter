@@ -9,8 +9,8 @@ export default function Grid({ children }: PropsWithChildren) {
 const GridStyles = styled.div`
 	display: flex;
 	flex-direction: column;
-	gap: 1em;
-	padding: 5vw;
+	gap: 5vw;
+	padding: 90px 5vw 5vw 5vw;
 	${backgroundGradient};
 	min-height: 100vh;
 `;

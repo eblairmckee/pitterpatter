@@ -8,10 +8,11 @@ body {
 	color: #3c3c3c;
 }
 
-html {
+/* this is too error prone. should probably do it in JS. sigh.  */
+/* html {
 	scroll-snap-type: y mandatory;
 	overflow-y: scroll;
-}
+} */
 
 h1,
 h2,

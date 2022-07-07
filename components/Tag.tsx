@@ -21,13 +21,18 @@ const tagColorMap: Record<TagType, string> = tagArr.reduce((acc, tag) => {
 }, {} as Record<TagType, string>);
 
 type TagProps = {
-	name: TagType;
+	name: TagType | 'All';
 };
 
 export default function Tag({ name }: TagProps) {
 	return (
-		<Link href={`/tags/${name}`}>
-			<TagStyles style={{ backgroundColor: tagColorMap[name] }}>
+		<Link href={name === 'All' ? '/' : `/tags/${name}`}>
+			<TagStyles
+				style={{
+					backgroundColor:
+						name === 'All' ? accentColors[6] : tagColorMap[name],
+				}}
+			>
 				{name}
 			</TagStyles>
 		</Link>

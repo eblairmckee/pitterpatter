@@ -1,24 +1,20 @@
-import Link from 'next/link';
-import { Tag } from '../graphql/generated';
+import { Tag as TagType } from '../graphql/generated';
 import { styled } from '@linaria/react';
 import { backgroundGradient } from '../styles/colors';
 import { shadow } from '../styles/shared';
+import Tag from './Tag';
 
 type NavProps = {
-	active: Tag | 'All';
+	active: TagType | 'All';
 };
 
 export default function Navigation({ active }: NavProps) {
 	return (
 		<NavWrapper>
 			<NavGrid>
-				<Link href="/" key="All">
-					<NavItem>All</NavItem>
-				</Link>
-				{Object.values(Tag).map((tag) => (
-					<Link href={`/tags/${tag}`} key={tag}>
-						<NavItem>{tag}</NavItem>
-					</Link>
+				<Tag name="All" />
+				{Object.values(TagType).map((tag) => (
+					<Tag key={tag} name={tag} />
 				))}
 			</NavGrid>
 		</NavWrapper>
@@ -34,21 +30,24 @@ const NavWrapper = styled.div`
 	${backgroundGradient};
 	${shadow};
 	width: 100%;
-	opacity: 0;
-	transform: translateY(-50%);
 	transition: ease all 250ms;
-	&:hover {
-		opacity: 1;
-		transform: translateY(0%);
-	}
 `;
 
 const NavGrid = styled.nav`
 	display: flex;
-	gap: 2em;
-	padding: 1em 2em;
+	gap: 0.5em;
+	padding: 0.5em 1em;
 	overflow-x: scroll;
 	text-align: center;
+	> * {
+		transition: ease all 250ms;
+		transform: scale(0.7);
+	}
+	&:hover {
+		> * {
+			transform: scale(1);
+		}
+	}
 `;
 const NavItem = styled.h3`
 	margin-block-start: 0;

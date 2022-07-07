@@ -1,12 +1,12 @@
 import { useCallback, useState, memo, useEffect } from 'react';
 import { graphcms } from '../../api/graphCMS';
-import Button from '../../components/Button';
 import Grid from '../../components/Grid';
 import Question from '../../components/Question';
 import { shuffle } from '../../utils/shuffle';
 import QUESTIONS_BY_TAG from '../../src/queries/questionsByTag.graphql';
 import { Tag, Question as QuestionType } from '../../graphql/generated';
 import Navigation from '../../components/Navigation';
+import ShuffleButton from '../../components/ShuffleButton';
 
 type TagPageProps = {
 	questions: QuestionType[];
@@ -23,13 +23,13 @@ function TagPage({ questions, tag }: TagPageProps) {
 
 	const handleShuffleClick = useCallback(() => {
 		setSortedQuestions(shuffle(sortedQuestions));
+		window.scrollTo({ top: 0 });
 	}, [sortedQuestions]);
+
 	return (
 		<Grid>
 			<Navigation active={tag} />
-			<Button fab onClick={handleShuffleClick}>
-				⇅
-			</Button>
+			<ShuffleButton onClick={handleShuffleClick} />
 			{sortedQuestions.map((question) => (
 				<Question key={question.id} question={question} />
 			))}
