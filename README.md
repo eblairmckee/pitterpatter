@@ -55,7 +55,7 @@ For TypeScript's sake, you will need to enter the schema exactly as I have it ab
 
 Create some questions using the schema, publish, and then make sure you can run the following query in the playground:
 
-```
+```graphql
 query MyQuery {
   questions {
     prompt
@@ -70,7 +70,7 @@ query MyQuery {
 
 After you've created the Tags enum, add some tags to your questions. Then go ahead and try this query in the playground:
 
-```
+```graphql
 query MyQuery($tags: [Tag!]) {
   questions(where: {tags_contains_some: $tags}) {
     prompt
@@ -92,6 +92,33 @@ If everything works, you can go ahead and start ingesting the data in this repo!
 Run `yarn install` to get your dependencies setup.
 
 Grab your API key and authentication headers from GraphCMS and add them to both the `graphql.config.js` and `codegen.yaml` files.
+
+#### graphql.config.js
+```js
+module.exports = {
+	schema: {
+		<YOUR_SCHEMA_URL_HERE>:
+			{
+				headers: {
+					Authorization:
+						<YOUR_AUTH_CODE_HERE>
+				},
+			},
+	},
+};
+
+```
+
+#### codegen.yaml
+```yaml
+schema: <YOUR_SCHEMA_URL_HERE>
+documents: './src/queries/*.graphql'
+generates:
+    graphql/generated.ts:
+        plugins:
+            - typescript
+            - typescript-operations
+```
 
 Run `yarn codegen` to generate TypeScript types from your schema. Check `/graphql/generated.ts` and make sure your types are there.
 
