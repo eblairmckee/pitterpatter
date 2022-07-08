@@ -1,9 +1,3 @@
-👋🏼 I made this project because I like to study while walking my dogs, but the repo can also be repurposed to create study guides for anything! 
-
-If you want to use this repo as a study guide front end eng interview questions and CS concepts, it's deployed here. 
-
-Otherwise, if you want to use this as a template to BYO study guides, make sure you follow the directions below _exactly_. This entire project relies on strong types and codegen, one mistake and it won't work. 
-
           ___                       ___           ___           ___           ___       
         /\  \          ___        /\  \         /\  \         /\  \         /\  \      
         /::\  \        /\  \       \:\  \        \:\  \       /::\  \       /::\  \     
@@ -27,6 +21,13 @@ Otherwise, if you want to use this as a template to BYO study guides, make sure 
                       /:/  /                                   \:\__\        |:|  |    
                       \/__/                                     \/__/         \|__|   
 
+👋🏼 I made this project because I like to study while walking my dogs, but the repo can also be repurposed to create study guides for anything! 
+
+If you want to use this repo as a study guide front end eng interview questions and CS concepts, it's deployed here. 
+
+Otherwise, if you want to use this as a template to BYO study guides, make sure you follow the directions below _exactly_. This entire project relies on strong types and codegen, one mistake and it won't work. 
+
+> Let's get at 'er
 ## Stack
 
 -   [Next.js](https://nextjs.org/) bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
@@ -106,7 +107,6 @@ module.exports = {
 			},
 	},
 };
-
 ```
 
 #### codegen.yaml
@@ -128,4 +128,4 @@ Go ahead and run `yarn dev` if you want hot reloading, otherwise `yarn build` an
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
