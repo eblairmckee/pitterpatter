@@ -43,6 +43,10 @@ export const buttonDefaultStyles = `
 		cursor: pointer;
 		transition: ease all 300ms;
 		border-radius: 20px;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		&:hover {
 			transform: scale(0.95);
 		}

@@ -29,7 +29,8 @@ pre {
 }
 
 a {
-	color: inherit;
+	color: #7d41fd;
+	font-weight: bold;
 	text-decoration: none;
 }
 

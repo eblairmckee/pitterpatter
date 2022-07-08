@@ -39,13 +39,15 @@ const NavGrid = styled.nav`
 	padding: 0.5em 1em;
 	overflow-x: scroll;
 	text-align: center;
-	> * {
-		transition: ease all 250ms;
-		transform: scale(0.7);
-	}
-	&:hover {
+	@media (min-width: 768px) {
 		> * {
-			transform: scale(1);
+			transition: ease all 250ms;
+			transform: scale(0.7);
+		}
+		&:hover {
+			> * {
+				transform: scale(1);
+			}
 		}
 	}
 `;
