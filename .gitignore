@@ -33,7 +33,3 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-
-# API stuff
-.codegen.yaml
-.graphql.config.js
