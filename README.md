@@ -21,9 +21,10 @@
                       /:/  /                                   \:\__\        |:|  |    
                       \/__/                                     \/__/         \|__|   
 
+
 👋🏼 I made this project because I like to study while walking my dogs, but the repo can also be repurposed to create study guides for anything! 
 
-If you want to use this repo as a study guide front end eng interview questions and CS concepts, it's deployed here. 
+If you want to use this repo as a study guide front end eng interview questions and CS concepts, [it's deployed here](https://pitterpatter.vercel.app/). 
 
 Otherwise, if you want to use this as a template to BYO study guides, make sure you follow the directions below _exactly_. This entire project relies on strong types and codegen, one mistake and it won't work. 
 
